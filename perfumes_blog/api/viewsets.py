@@ -8,8 +8,12 @@ from .permissions import IsOwnerOrReadOnly
 class PerfumesListView(ListCreateAPIView):
     queryset = Perfume.objects.all()
     serializer_class = PerfumeSerializer
+    def perform_create(self, serializer):
+        serializer.save()
 
 class PerfumesDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Perfume.objects.all()
     serializer_class = PerfumeSerializer
     permission_classes = (IsOwnerOrReadOnly, )
+
+
